@@ -93,7 +93,7 @@ for i in "${!DISK_LIST[@]}"; do
     d="${DISK_LIST[$i]}"
     size=$(lsblk -d -n -o SIZE "$d" 2>/dev/null)
     model=$(lsblk -d -n -o MODEL "$d" 2>/dev/null | xargs)
-    echo "  $((i+1))) $d ($size ${model:-Unknown Model})"
+    echo " $((i+1))) $d ($size ${model:-Unknown Model})"
 done
 echo ""
 
