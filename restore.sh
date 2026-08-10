@@ -55,6 +55,8 @@ list_snapshots() {
     local sorted_nums
     sorted_nums=($(printf '%s\n' "${raw_nums[@]}" | sort -n))
 
+    echo "    ID    |      Date (UTC)     |   Description"
+
     for num in "${sorted_nums[@]}"; do
         local xml="${snap_dir}/${num}/info.xml"
         local date desc formatted_id
@@ -64,7 +66,6 @@ list_snapshots() {
         date=$(grep -oP '(?<=<date>).*?(?=</date>)' "$xml" 2>/dev/null || sed -n 's/.*<date>\(.*\)<\/date>.*/\1/p' "$xml")
         desc=$(grep -oP '(?<=<description>).*?(?=</description>)' "$xml" 2>/dev/null || sed -n 's/.*<description>\(.*\)<\/description>.*/\1/p' "$xml")
 
-        echo "    ID    |      Date (UTC)     |   Description"
         echo " $formatted_id | $date | $desc"
     done
     echo ""
