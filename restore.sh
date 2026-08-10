@@ -234,10 +234,15 @@ if [ -f /usr/local/bin/one-time-grub-setup.sh ]; then
     echo "          Debian Live USB Restore Utility          "
     echo "==================================================="
     echo ""
-    sudo dpkg-reconfigure grub-efi-amd64
+    if sudo dpkg-reconfigure grub-efi-amd64; then
+        echo ""
+        echo "Restore complete!"
+    else
+        echo ""
+        echo "Timed out. Copy and paste to run:"
+        echo "sudo dpkg-reconfigure grub-efi-amd64"
+    fi
     
-    echo ""
-    echo "Restore complete!"
     echo ""
     read -rp "Press enter to exit..." < /dev/tty
 
